@@ -1,6 +1,8 @@
 let download = require('../index.js');
 
-download('http://releases.ubuntu.com/16.04.2/ubuntu-16.04.2-server-amd64.iso', '/tmp/ubuntu.iso').progress((progress) => {
+let timeout = 20 * 1000; // 20 seconds
+
+download('http://127.0.0.1:1337/aad/link/graphger', '/tmp/demo.html', { timeout: timeout, maxRedirects: 5 }).progress((progress) => {
     console.log(progress.msg + ' (' + progress.rel + '%)');
 }).then(() => {
     console.log('Done');
