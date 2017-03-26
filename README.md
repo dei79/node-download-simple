@@ -4,7 +4,7 @@ Download Simple is a small implementation of a download client which transfers t
 well for large files as well. The client supports automatic following of redirects, network timeouts and progress 
 updates based on promisses. 
 
-'''js 
+```js 
 let download = require('download-simple');
 
 download('http://127.0.0.1:1337/aad/link/graphger', '/tmp/demo.html', { timeout: 20 * 1000, maxRedirects: 5 }).progress((progress) => {
