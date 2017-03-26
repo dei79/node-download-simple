@@ -1,4 +1,4 @@
-#Download Simple
+# Download Simple
 
 Download Simple is a small implementation of a download client which transfers the blocks chunk by chunk. This works
 well for large files as well. The client supports automatic following of redirects, network timeouts and progress 
