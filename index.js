@@ -50,6 +50,9 @@ function download(uri, headersOrTargetFileName, optionalTargetFileName, options)
     // generate a new defered call
     let defer = Q.defer();
 
+    // get time before request
+    let beforeRequestDate = new Date();
+
     // initialize the request
     var protocolRequest = protocolClient.request(requestOptions, (response) => {
 
@@ -76,7 +79,7 @@ function download(uri, headersOrTargetFileName, optionalTargetFileName, options)
                 }).catch((e) => {
                     return defer.reject(e);
                 });
-            };
+            }
 
         // check error code
         } else if (response && (response.statusCode < 200 && response.statusCode > 299)) {
@@ -84,6 +87,15 @@ function download(uri, headersOrTargetFileName, optionalTargetFileName, options)
 
         // Download totally
         } else {
+
+            // get time after first bytes
+            let afterFirstBytesRequestDate = new Date();
+
+            // notify the progress
+            defer.notify({
+                msg: 'Received first bytes from server after ' + (afterFirstBytesRequestDate - beforeRequestDate) + ' ms...',
+                size: 0, current: 0, rel: 0
+            });
 
             // ensure we can create the file stream
             var targetFileStream = fs.createWriteStream(target);
